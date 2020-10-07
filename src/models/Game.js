@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 const Game = mongoose.Schema({
-    id: mongoose.Schema.Types.ObjectId,
     first: {
         type: String,
         required: true,

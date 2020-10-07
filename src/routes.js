@@ -1,8 +1,12 @@
 const express = require('express');
 const routes = express.Router();
 
-routes.get("/", (req, res) => {
-    res.status(200).json({ message: process.env.HTTP_PORT });
-})
+// Controllers
+const gameController = require('./controllers/game.controller');
+
+
+// Game
+routes.post("/games", gameController.createGame);
+
 
 module.exports = routes;
