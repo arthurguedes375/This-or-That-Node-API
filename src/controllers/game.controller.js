@@ -23,6 +23,48 @@ const gameController = {
         }
     },
 
+    vote: async (req, res) => {
+        try {
+            const { id: _id } = req.params;
+            const { option } = req.body;
+            const options = {
+                0: "firstVotes",
+                1: "secoundVotes",
+            };
+
+            if (!options[option]) return res.status(400).json({ message: "Invalid Option" })
+
+            const gameTot = await Game.findOne({ _id }).exec();
+
+            if (!gameTot) return res.status(400).json({ message: "Game not Found" });
+
+            const voting = await Game.findOneAndUpdate({ _id }, {
+                [options[option]]: gameTot[options[option]] + 1
+            }).exec();
+
+            if (!voting) return res.status(500).json({ message: "Internal Server Error" });
+
+            const firstVote = (options[option] === 'firstVotes') ? gameTot.firstVotes + 1 : gameTot.firstVotes;
+            const secoundVote = (options[option] === 'secoundVotes') ? gameTot.secoundVotes + 1 : gameTot.secoundVotes;
+
+            const totalVotes = firstVote + secoundVote;
+
+            const firstPercentage = (firstVote / totalVotes) * 100;
+            const secoundPercentage = (secoundVote / totalVotes) * 100;
+
+
+            return res.status(201).json({
+                ...voting._doc,
+                [options[option]]: gameTot[options[option]] + 1,
+                firstPercentage: Math.round(firstPercentage) || 0,
+                secoundPercentage: Math.round(secoundPercentage) || 0,
+            });
+        } catch (err) {
+            console.log(err);
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+    },
+
 };
 
 module.exports = gameController;
