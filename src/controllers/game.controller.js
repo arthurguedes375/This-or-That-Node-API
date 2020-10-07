@@ -23,6 +23,35 @@ const gameController = {
         }
     },
 
+    select: async (req, res) => {
+        try {
+            const { id: _id } = req.params;
+            const { page, per_page } = req.query;
+
+            if (_id) {
+                const gameSelected = await Game.findOne({ _id }).exec();
+
+                return res.status(200).json(gameSelected);
+            } else {
+
+                const pagination = {
+                    page: (parseInt(page) - 1) || 0,
+                    per_page: parseInt(per_page) || 5,
+                };
+
+                const gameSelected = await Game
+                    .find()
+                    .skip(pagination.page * pagination.per_page)
+                    .limit(pagination.per_page)
+                    .exec();
+
+                return res.status(200).json(gameSelected);
+            }
+        } catch (err) {
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+    },
+
     vote: async (req, res) => {
         try {
             const { id: _id } = req.params;
