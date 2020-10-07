@@ -38,11 +38,6 @@ const gameController = {
 
             if (!gameTot) return res.status(400).json({ message: "Game not Found" });
 
-            const voting = await Game.findOneAndUpdate({ _id }, {
-                [options[option]]: gameTot[options[option]] + 1
-            }).exec();
-
-            if (!voting) return res.status(500).json({ message: "Internal Server Error" });
 
             const firstVote = (options[option] === 'firstVotes') ? gameTot.firstVotes + 1 : gameTot.firstVotes;
             const secoundVote = (options[option] === 'secoundVotes') ? gameTot.secoundVotes + 1 : gameTot.secoundVotes;
@@ -52,6 +47,13 @@ const gameController = {
             const firstPercentage = (firstVote / totalVotes) * 100;
             const secoundPercentage = (secoundVote / totalVotes) * 100;
 
+            const voting = await Game.findOneAndUpdate({ _id }, {
+                [options[option]]: gameTot[options[option]] + 1,
+                firstPercentage: Math.round(firstPercentage),
+                secoundPercentage: Math.round(secoundPercentage),
+            }).exec();
+
+            if (!voting) return res.status(500).json({ message: "Internal Server Error" });
 
             return res.status(201).json({
                 ...voting._doc,

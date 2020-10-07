@@ -17,6 +17,14 @@ const Game = mongoose.Schema({
         type: Number,
         default: 0,
     },
+    firstPercentage: {
+        type: Number,
+        default: 0,
+    },
+    secoundPercentage: {
+        type: Number,
+        default: 0,
+    },
 });
 
 module.exports = mongoose.model('Game', Game, 'Game');
