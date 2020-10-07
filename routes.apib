@@ -1,0 +1,93 @@
+FORMAT: 1A
+HOST: http://localhost:3333
+
+# Group Game
+
+## List Many Games [/games]
+### List many Games [GET]
++ Response 200 (application/json)
+    [
+        {
+            "firstVotes": 1,
+            "secoundVotes": 0,
+            "firstPercentage": 100,
+            "secoundPercentage": 0,
+            "_id": "5f7dddbec50f27212097cede",
+            "first": "Can't kiss anyone forever",
+            "secound": "Kiss everyone who you know",
+            "__v": 0
+        },
+        {
+            "firstVotes": 0,
+            "secoundVotes": 0,
+            "firstPercentage": 0,
+            "secoundPercentage": 0,
+            "_id": "5f7de0b80a0b8629012ed079",
+            "first": "Be rich",
+            "secound": "Love anyone more than your-self",
+            "__v": 0
+        }
+    ]
++ Parameters
+    + page: 5 (number, optional) - Page that you want to see
+        + Default: `1`
+    + per_page: 3 (number, optional) - Quantity of items per page
+        + Default: `5`
+
+
+## List one Game [/games/:gameId]
+### List one Game [GET]
++ Response 200 (application/json)
+    {
+        "firstVotes": 1,
+        "secoundVotes": 0,
+        "firstPercentage": 100,
+        "secoundPercentage": 0,
+        "_id": "5f7dddbec50f27212097cede",
+        "first": "Can't kiss anyone forever",
+        "secound": "Kiss everyone who you know",
+        "__v": 0
+    },
+
+## Create a Game [/games]
+### Create a Game [POST]
++ Request (application/json)
+    + Body
+        {
+            "first": "Eat hot dog",
+            "secound": "Eat hamburger"
+        }
+
++ Response 201 (application/json)
+    {
+        "firstVotes": 0,
+        "secoundVotes": 0,
+        "firstPercentage": 0,
+        "secoundPercentage": 0,
+        "_id": "5f7de130eb1e1129074cc36e",
+        "first": "Eat hot dog",
+        "secound": "Eat hamburger",
+        "__v": 0
+    }
+
+# Group Votes
+## Vote [/votes/:gameId]
+### Vote [PUT]
++ Response 200 (application/json)
+    + Body
+        {
+            "firstVotes": 1,
+            "secoundVotes": 0,
+            "firstPercentage": 100,
+            "secoundPercentage": 0,
+            "_id": "5f7dddbec50f27212097cede",
+            "first": "Eat hot dog",
+            "secound": "Eat hamburger",
+            "__v": 0
+        }
++ Request (application/json)
+    {
+        "option": 0
+    }
++ Parameters
+    + option: 0 (number, required) - Option that you want to choice, that can be 0(first) or 1(secound)

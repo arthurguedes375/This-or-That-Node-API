@@ -84,7 +84,7 @@ const gameController = {
 
             if (!voting) return res.status(500).json({ message: "Internal Server Error" });
 
-            return res.status(201).json({
+            return res.status(200).json({
                 ...voting._doc,
                 [options[option]]: gameTot[options[option]] + 1,
                 firstPercentage: Math.round(firstPercentage) || 0,
