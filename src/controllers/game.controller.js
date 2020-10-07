@@ -7,6 +7,10 @@ const gameController = {
             const { first, secound } = req.body;
             if (!first || !secound) return res.status(400).json({ message: "Missing Data" })
 
+            const gameAlreadyExists = await Game.findOne({ first, secound }).exec();
+
+            if (gameAlreadyExists) return res.status(401).json({ message: "This Game Already Exists" })
+
             const createGame = await new Game({
                 first,
                 secound,
