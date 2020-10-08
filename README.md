@@ -18,4 +18,8 @@
 - Commit your changes
 - Make a pull request
 
+## :bulb: Tips
+- If you want to use our frontend, you can use this [frontend](https://github.com/arthurguedes375/This-or-That-React-Frontend)
+- Thats our "official" frontend
+
 <p align="center">Made with :heart: by <strong>Arthur Guedes</strong></p>
