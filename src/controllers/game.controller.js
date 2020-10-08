@@ -55,7 +55,7 @@ const gameController = {
     vote: async (req, res) => {
         try {
             const { id: _id } = req.params;
-            if (!req.params.id || _id == 'undefined' || _id == 'null') return res.status(400).json({ message: "Missing game id" })
+            if (!_id || _id == 'undefined' || _id == 'null') return res.status(400).json({ message: "Missing game id" })
 
             const { option } = req.body;
             const options = {
