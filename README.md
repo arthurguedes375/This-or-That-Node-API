@@ -21,5 +21,9 @@
 ## :bulb: Tips
 - If you want to use our frontend, you can use this [frontend](https://github.com/arthurguedes375/This-or-That-React-Frontend)
 - Thats our "official" frontend
+- If you want to see the routes docs
+- Press <kbd>CTRL+P</kbd>
+- Paste it: `ext install develiteio.api-blueprint-viewer` then press <kbd>Enter</kbd>
+- Go to the file: `routes.apib` and press on top-right on of these buttons will show you a preview
 
 <p align="center">Made with :heart: by <strong>Arthur Guedes</strong></p>
